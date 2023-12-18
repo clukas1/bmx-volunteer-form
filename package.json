@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-util": "^3.0.8",
+    "vinyl-ftp": "^0.6.1"
+  }
+}

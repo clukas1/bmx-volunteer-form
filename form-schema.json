@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://bmx.connolly.ch/form-schema.json",
+  "title": "Form schema to schedule volunteers for a bmx event",
+  "description": "This schema helps define a form to let people sign up as volunteers for a bmx event.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "The schema of the form"
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the form"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the form"
+    },
+    "items": {
+      "$ref": "#/$defs/sectionHeaderList"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "items"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "sectionHeader": {
+      "type": "object",
+      "description": "Section header",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the section"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the section"
+        },
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sectionHeaderList"
+            },
+            {
+              "$ref": "#/$defs/inputList"
+            }
+          ]
+        }
+      },
+      "required": [
+          "title",
+          "items"
+      ]
+    },
+    "input": {
+      "type": "object",
+      "description": "Input field",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "The label of the input field"
+        },
+        "numberVolunteers": {
+          "type": "integer",
+          "description": "The number of volunteers needed for this task"
+        },
+        "registeredVolunteers": {
+          "type": "array",
+          "description": "The volunteers already registered for this task",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the volunteer"
+              },
+              "email": {
+                "type": "string",
+                "description": "The email of the volunteer"
+              },
+              "phone": {
+                "type": "string",
+                "description": "The phone number of the volunteer"
+              },
+              "comment": {
+                "type": "string",
+                "description": "A comment from the volunteer"
+              }
+            },
+            "required": [
+              "name",
+              "email",
+              "phone"
+            ]
+          }
+        }
+      },
+      "required": [
+          "label",
+          "numberVolunteers"
+      ]
+    },
+    "inputList": {
+      "type": "array",
+      "description": "The form fields",
+      "items": {
+        "$ref": "#/$defs/input"
+      }
+    },
+    "sectionHeaderList": {
+      "type": "array",
+      "description": "List of section headers",
+      "items": {
+        "$ref": "#/$defs/sectionHeader"
+      }
+    }
+  }
+}
